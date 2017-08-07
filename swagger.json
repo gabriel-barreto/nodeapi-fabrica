@@ -1,0 +1,184 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Fabrica de Software Sample API",
+        "description": "Sample API for Fabrica de Software using Mongoose + NodeJS",
+        "version": "1.0.0"
+    },
+    "host": "localhost:5000",
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "definitions": {
+        "Users": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateUsers": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "username": {
+            "name": "username",
+            "in": "path",
+            "description": "username do usuário",
+            "type": "string",
+            "format": "string",
+            "required": true
+        }
+    },
+    "paths": {
+        "/test": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "API Online!"
+                    }
+                },
+                "summary": "Verifica se a API está online"
+            }
+        },
+        "/users": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuários",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "summary": "Retorna todos os usuários da base de dados"
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "userData",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Usuário adicionado a base de dados",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "summary": "Recebe os dados de um novo usuário e inclui os mesmos na base de dados"
+            }
+        },
+        "/users/{username}": {
+            "get": {
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/username"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuários",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "summary": "Retorna todos os dados de um usuário"
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/username"
+                    },
+                    {
+                        "in": "body",
+                        "name": "userData",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateUsers"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados do usuário atualizados",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "summary": "Recebe os dados atualizados do usuário, atualiza a base de dados e retorna os novos valores persistidos"
+            },
+            "delete": {
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/username"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuário deletado com sucesso",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "summary": "Deleta o usuário que possui o username informado"
+            }
+        }
+    }
+}
