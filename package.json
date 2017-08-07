@@ -4,6 +4,7 @@
     "description": "Node + Mongoose sample for fabrica de software",
     "main": "index.js",
     "author": "Gabriel Barreto <barreto-gabriel@outlook.com>",
+    "repository": "https://github.com/gabriel-barreto/nodeapi-fabrica.git",
     "license": "MIT",
     "dependencies": {
         "body-parser": "^1.17.2",
